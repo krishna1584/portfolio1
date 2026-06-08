@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useEffect, useState } from "react";
 import {
   Container,
@@ -17,18 +19,16 @@ import {
 } from "./styles";
 import {
   BsGithub,
-  BsDribbble,
   BsLinkedin,
 } from "../../styles/Icons";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { ThemeContext } from "styled-components";
 import nookies from "nookies";
 import ThemeSwitcher from "../ThemeSwitcher";
 import { Sling as Hamburger } from "hamburger-react";
-import { Fade, Zoom } from "react-reveal";
+import { motion } from "framer-motion";
 
 function Header(props) {
-  const router = useRouter();
   const [fixed, setFixed] = useState(false);
   const { title } = useContext(ThemeContext);
   const [theme, setTheme] = useState();
@@ -54,7 +54,7 @@ function Header(props) {
   return (
     <Container active={fixed} open={open}>
       <Wrapper>
-        <Title  onClick={() => router.push("/")}>
+        <Title href="/" aria-label="Back home">
           <EntraptaWrapper>
             <ContainerEye>
               <Eyes>
@@ -65,24 +65,25 @@ function Header(props) {
               </Eyes>
             </ContainerEye>
           </EntraptaWrapper>
-          <BackText className="back-text">
-            Back home
-          </BackText>
+          <BackText className="back-text">Back home</BackText>
         </Title>
         <DesktopHeader>
           <HeaderMenu>
             <ul>
-              <li onClick={() => router.push("/about")}>
-                <span>01. </span> About
+              <li>
+                <Link href="/about">
+                  <span>01. </span> About
+                </Link>
               </li>
-              <li onClick={() => router.push("/projects")}>
-                <span>02. </span> Projects
+              <li>
+                <Link href="/projects">
+                  <span>02. </span> Projects
+                </Link>
               </li>
-                <li onClick={() => router.push("/blog")}>
-                <span>03. </span> Blog
-              </li>
-              <li onClick={() => router.push("/contact")}>
-                <span>04. </span> Contact
+              <li>
+                <Link href="/contact">
+                  <span>03. </span> Contact
+                </Link>
               </li>
             </ul>
             <ThemeSwitcher onClick={props.toggleTheme} checked={title} />
@@ -101,12 +102,6 @@ function Header(props) {
                 }
                 size={17}
               />
-              <BsDribbble
-                onClick={() =>
-                  window.open("https://dribbble.com/", "_blank").focus()
-                }
-                size={17}
-              />
             </SocialMedias>
           </HeaderMenu>
         </DesktopHeader>
@@ -117,28 +112,39 @@ function Header(props) {
           {open && (
             <MobileHeader key={Math.random()}>
               <ul>
-                <Fade top delay={100}>
-                  <li onClick={() => router.push("/about") | setOpen(!open)}>
+                <motion.li
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  <Link href="/about" onClick={() => setOpen(false)}>
                     <span>01. </span> About
-                  </li>
-                </Fade>
-                <Fade top delay={300}>
-                  <li onClick={() => router.push("/projects") | setOpen(!open)}>
+                  </Link>
+                </motion.li>
+                <motion.li
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  <Link href="/projects" onClick={() => setOpen(false)}>
                     <span>02. </span> Works
-                  </li>
-                </Fade>
-                <Fade top delay={500}>
-                  <li onClick={() => router.push("/blog") | setOpen(!open)}>
-                    <span>03. </span> Blog
-                  </li>
-                </Fade>
-                <Fade top delay={1000}>
-                  <li onClick={() => router.push("/contact") | setOpen(!open)}>
-                    <span>04. </span> Contact
-                  </li>
-                </Fade>
+                  </Link>
+                </motion.li>
+                <motion.li
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  <Link href="/contact" onClick={() => setOpen(false)}>
+                    <span>03. </span> Contact
+                  </Link>
+                </motion.li>
               </ul>
-              <Zoom delay={500}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+              >
                 <SocialMedias>
                   <BsGithub
                     onClick={() =>
@@ -159,17 +165,9 @@ function Header(props) {
                     }
                     size={17}
                   />
-                  <BsDribbble
-                    onClick={() =>
-                      window
-                        .open("https://dribbble.com/", "_blank")
-                        .focus()
-                    }
-                    size={17}
-                  />
                   <ThemeSwitcher onClick={props.toggleTheme} checked={title} />
                 </SocialMedias>
-              </Zoom>
+              </motion.div>
             </MobileHeader>
           )}
         </MobileContainer>

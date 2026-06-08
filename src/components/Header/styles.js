@@ -1,4 +1,7 @@
+"use client";
+
 import styled, { css } from "styled-components";
+import Link from "next/link";
 
 export const Container = styled.div`
   display: flex;
@@ -45,6 +48,11 @@ export const Container = styled.div`
   img {
     cursor: pointer;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -54,7 +62,7 @@ export const Wrapper = styled.div`
   width: 95%;
 `;
 
-export const Title = styled.div`
+export const Title = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;

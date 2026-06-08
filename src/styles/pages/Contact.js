@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -141,6 +143,20 @@ export const SubmitButton = styled.button`
     bottom: 0;
     height: 100%;
   }
+
+  :disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+`;
+
+export const StatusMessage = styled.p`
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: ${(props) =>
+    props.variant === "error"
+      ? props.theme.colors.secundaryText
+      : props.theme.colors.primary};
 `;
 
 export const Form = styled.form`

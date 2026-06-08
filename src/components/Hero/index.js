@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import background from "/public/static/assets/background.gif";
 import {
@@ -13,23 +15,21 @@ import {
   HeroFooter,
   Main
 } from "./styles";
-import { Fade, Flip, Zoom } from "react-reveal";
+import { motion } from "framer-motion";
 import { BsEye, BsChat } from "../../styles/Icons";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import Link from "next/link";
 
 function Hero() {
-  const router = useRouter();
-
   return (
     <Container>
       <Background image={background} />
-      <Head>
-        <title>Krishna Yadav — Frontend Developer</title>
-      </Head>
       <Wrapper>
         <Main>
-          <Fade top>
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <Title>
               <Letter className="stretch">K</Letter>
               <Letter>R</Letter>
@@ -39,8 +39,12 @@ function Hero() {
               <Letter>N</Letter>
               <Letter className="stretch">A</Letter>
             </Title>
-          </Fade>
-          <Fade top delay={100}>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <SubTitle>
               <Letter className="coded">Y</Letter>
               <Letter className="coded">A</Letter>
@@ -48,24 +52,36 @@ function Hero() {
               <Letter className="stretch coded">A</Letter>
               <Letter className="stretch coded">V</Letter>
             </SubTitle>
-          </Fade>
-          <Flip top delay={600}>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, rotateX: 18 }}
+            animate={{ opacity: 1, rotateX: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <About>
-              Front-end web <span>developer</span> and Content Creator
+              MERN <span>developer</span> building real-time products
             </About>
-          </Flip>
+          </motion.div>
         </Main>
         <HeroFooter>
-          <Fade left delay={800}>
-            <ViewButton onClick={() => router.push("/about")}>
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <ViewButton href="/about">
               <BsEye /> see more about me
             </ViewButton>
-          </Fade>
-          <Fade right delay={800}>
-            <ContactButton onClick={() => router.push("/projects")}>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <ContactButton href="/projects">
               <BsChat /> My Work
             </ContactButton>
-          </Fade>
+          </motion.div>
         </HeroFooter>
       </Wrapper>
     </Container>

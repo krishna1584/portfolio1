@@ -1,5 +1,6 @@
+"use client";
+
 import React from "react";
-import { Zoom, Fade } from "react-reveal";
 import { Header, Title, Letter } from "./styles";
 import { motion } from "framer-motion";
 

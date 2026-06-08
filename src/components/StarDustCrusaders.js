@@ -50,7 +50,7 @@ export function StarDustCrusaders({ count }) {
     <>
       <pointLight ref={light} distance={40} intensity={8} color="#FFF" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
-        <dodecahedronBufferGeometry args={[0.1, 0]} />
+        <dodecahedronGeometry args={[0.1, 0]} />
         <meshPhongMaterial color="#FFF" />
       </instancedMesh>
     </>

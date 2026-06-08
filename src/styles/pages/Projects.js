@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -66,7 +68,8 @@ export const DateContainer = styled.div`
 export const ThumbnailWrapper = styled.div`
   width: 100%;
   position: relative;
-  height: 100%;
+  aspect-ratio: 16 / 10;
+  height: auto;
   overflow: hidden;
 
   :hover {
@@ -78,14 +81,17 @@ export const ThumbnailWrapper = styled.div`
 
 export const ProjectWrapper = styled.div`
   width: 100%;
-  max-width: 400px;
+  max-width: 520px;
   cursor: pointer;
   position: relative;
-  height: 500px;
+  height: auto;
+  text-decoration: none;
+  color: inherit;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     max-width: 90%;
-  } 
+    height: auto;
+  }
 
   :hover {
 
@@ -113,9 +119,15 @@ export const Thumbnail = styled.div`
   height: 100%;
   width: 100%;
   background-image: url(${(props) => props.src});
-  background-position: 10%;
-  background-size: cover;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.2);
   transition: all 0.2s;
+
+  &.cover {
+    background-size: cover;
+  }
 
   ::before {
     content: "";
@@ -221,14 +233,18 @@ export const StacksRow = styled.div`
 `;
 
 export const ProjectsMain = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
   width: 100%;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 100px;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(320px, 520px));
+  gap: 60px 80px;
   margin-top: 60px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: minmax(300px, 1fr);
+    gap: 50px;
+  }
 `;
 
 export const ProjectStatus = styled.div`

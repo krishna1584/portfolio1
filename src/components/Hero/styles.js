@@ -1,4 +1,7 @@
+"use client";
+
 import styled from "styled-components";
+import Link from "next/link";
 
 export const Container = styled.div`
   position: relative;
@@ -149,13 +152,14 @@ export const About = styled.h3`
   }
 `;
 
-export const ViewButton = styled.div`
+export const ViewButton = styled(Link)`
   position: absolute;
   bottom: -100px;
   left: 0;
   font-size: 1.5rem;
   font-family: "Quicksand", sans-serif;
   color: ${(props) => props.theme.colors.mainText};
+  text-decoration: none;
   cursor: pointer;
 
   display: flex;
@@ -197,7 +201,9 @@ export const ViewButton = styled.div`
   }
 `;
 
-export const ContactButton = styled.div`
+export const ContactButton = styled(Link)`
+  text-decoration: none;
+  color: inherit;
   position: absolute;
   bottom: -100px;
   right: 0;
